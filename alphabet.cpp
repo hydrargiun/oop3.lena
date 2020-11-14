@@ -88,6 +88,10 @@ namespace oop3 {
     }
     alphabet& alphabet::operator += (alphabet& alf ){
         std::set<char> buf2;
+        if (alf.size == 0){
+            throw  std::invalid_argument("buf not found");
+        }
+
         for (int i =0; i< alf.size; i++ ){
             buf2.insert(alf.alf[i]);
         }
@@ -121,7 +125,7 @@ namespace oop3 {
         for(int i =0; i< str.size(); i++){
             int pos =0 ;
             if(( pos = this->findchar_pos(str[i])) < 0) {
-                throw "wrong text";
+                throw  std::invalid_argument("wrong text");
             }
             else
             {
@@ -145,7 +149,7 @@ namespace oop3 {
         for(int i =0; i< str.size(); i++){
             int pos =0 ;
             if(( pos = this->findchar_pos(str[i])) < 0) {
-                throw "wrong text";
+                throw  std::invalid_argument("wrong text");
             }
             else
             {

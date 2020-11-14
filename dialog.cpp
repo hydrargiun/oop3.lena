@@ -17,10 +17,11 @@ namespace oop3{
              std::cout << "6. Слияние" << std::endl;
              std::cout << "7. Encoder " << std::endl;
              std::cout << "8. Decoder " << std::endl;
+             std::cout << "9. Проверка алфавита на наличие буквы " << std::endl;
 
              int pt;
              pt = getNum<int>();
-             if (pt < 0 || pt > 9){
+             if (pt < 0 || pt > 10){
                  std::cout << "wrong number"<< std::endl;
                  throw std::invalid_argument("wrong input");
                  continue;
@@ -139,7 +140,7 @@ namespace oop3{
                      std::cin >>str;
                      std::cout << "Введи n" << std::endl;
                      int n;
-                     std::cin >>n;
+                     n = getNum<int>();
                      std::cout<< "Encoded string  ->  "<< t1->second.encoder(str,n)<<"\n";
                  }
 
@@ -159,10 +160,29 @@ namespace oop3{
                      std::cin >>str;
                      std::cout << "Введи n" << std::endl;
                      int n;
-                     std::cin >>n;
+                     n = getNum<int>();
                      std::cout<< "Decoded string  ->  "<< t1->second.decoder(str,n)<<"\n";
                  }
 
+             }
+             if(pt == 9){
+                 std::cout << "Введи имя алфавита " << std::endl;
+                 std::string  name;
+                 std::cin >> name;
+                 std::map<std::string, alphabet> ::iterator t1;
+                 if((t1 = alftable.find(name)) == alftable.end()) {
+                     std::cout << "name is wrong" << std::endl;
+                 }
+                 else{
+                     std::cout << "Введит букву"<< std::endl;
+                     char a;
+                     std::cin >> a;
+                     if(t1->second.findchar(a)){
+                         std::cout << "Yes"<< std::endl;
+                     }
+                     else
+                         std::cout << "No"<< std::endl;
+                 }
              }
 
 
