@@ -4,7 +4,6 @@ namespace oop3 {
     private:
         char* alf{};
         int size;
-        static const int QUOTA = 10;
         std::string name;
     public:
         alphabet();
