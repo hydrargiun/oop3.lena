@@ -185,12 +185,17 @@ namespace oop3 {
     }
 
     alphabet &alphabet::operator=(const alphabet &init) {
-        this->size = init.size;
-        alf = new char[init.size];
-        for(int i = 0; i <= size; i++){
-            alf[i] = init.alf[i];
+
+
+        if(this != &init) {
+            delete [] this->alf;
+            this->size = init.size;
+            alf = new char[init.size];
+            for (int i = 0; i <= size; i++) {
+                alf[i] = init.alf[i];
+            }
+            return *this;
         }
-        return *this;
     }
 
 
