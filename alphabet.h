@@ -2,14 +2,16 @@
 namespace oop3 {
     class alphabet {
     private:
-        char alf[100];
+        char* alf{};
         int size;
+        static const int QUOTA = 10;
         std::string name;
     public:
         alphabet();
-        alphabet(std::string);
-        alphabet(std::string, char []);
-        void show();
+        ~alphabet(){delete [] alf;};
+        explicit alphabet(std::string);
+        alphabet(std::string, char*);
+        alphabet(std::string,const alphabet&);
         int findchar(char c);
         int findchar_pos(char c);
         alphabet &Set_char(char);
@@ -18,6 +20,7 @@ namespace oop3 {
         friend std::ostream& operator << (std::ostream& out, const alphabet& );
         std::string encoder(std::string ,int);
         std::string decoder(std::string ,int);
+        alphabet &operator =(const alphabet &);
 
 
 
