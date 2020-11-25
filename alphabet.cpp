@@ -2,31 +2,46 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include <utility>
 namespace oop3 {
-    alphabet::alphabet() {    //сеттер если значение не прередали
+    alphabet::alphabet() :size(0) {    //сеттер если значение не прередали
         this->name = "";
-        this->size = 0;
     }
 
-  alphabet::alphabet(std::string name) {
-      this->name = name;
+  alphabet::alphabet(std::string name) :name(name){
+      if (name == "eng"){
+          alf = new char[26];
+          char eng[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+          for(int i = 0; i < 26; i++){
+              alf[i]=eng[i];
+              this->size=26;
+
+          }
+          return;
+      }
       this->size = 0;
 
   }
 
+    alphabet::alphabet(std::string name, const alphabet &init) :alf(new char[init.size]),size(init.size),name(std::move(name)){
+        for(int i =0; i <= init.size;i++){
+            alf[i] = init.alf[i];
+        }
+    }
 
-    alphabet::alphabet(std::string name, char buf[] ){
+
+    alphabet::alphabet(std::string name, char *buf): name(std::move(name)){
         std::set<char> buf2;
         for(int i = 0; buf[i]!= '\0'; i++){
             buf2.insert(buf[i]);
         }
         int j =0;
+        alf = new char[buf2.size()];
         for(auto z : buf2){
             this->alf[j] = z;
             j++;
         }
-        this->name = name;
-        this->size = buf2.size();
+        this->size=buf2.size();
     }
 
 
@@ -67,9 +82,6 @@ namespace oop3 {
         std::cout << "Введите размер"<<std::endl;
         int num;
         in >> num;
-        if (num < 1 || num> 100) {
-            throw std::invalid_argument("invalid number!");
-        }
         std::cout << "Введите алфавит"<<std::endl;
         std::set<char> buf2;
         for (int i = 0; i < num; i++) {
@@ -77,7 +89,8 @@ namespace oop3 {
             in >> a;
             buf2.insert(a);
             }
-          int i =0;
+           int i =0;
+           alf.alf = new char[buf2.size()];
            for( auto x: buf2){
                alf.alf[i] = x;
                i++;
@@ -98,7 +111,8 @@ namespace oop3 {
         for (int i =0; i< this->size; i++ ){
             buf2.insert(this->alf[i]);
         }
-        if(buf2.size() < 100){
+        delete [] this->alf;
+        this->alf = new char[buf2.size()];
             int i =0;
             for (auto x: buf2){
                 this->alf[i] = x;
@@ -106,7 +120,7 @@ namespace oop3 {
             }
             this->size= buf2.size();
 
-        }
+
         return *this;
     }
 
@@ -170,6 +184,14 @@ namespace oop3 {
         return str;
     }
 
+    alphabet &alphabet::operator=(const alphabet &init) {
+        this->size = init.size;
+        alf = new char[init.size];
+        for(int i = 0; i <= size; i++){
+            alf[i] = init.alf[i];
+        }
+        return *this;
+    }
 
 
 
