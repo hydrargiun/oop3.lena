@@ -1,26 +1,17 @@
 #include <iostream>
-#include "dialog.h"
-#include "getnum.h"
-
-
-
-using namespace oop3;
+#include "Table.h"
+#include "Lux.h"
+#include "Multiseat.h"
+using namespace oop4;
 int main() {
+    Table tab;
 
 
-        try {
-            dialog();
+    Lux c(1,1);
+    tab = tab.Add(&c);
+   // Multiseat a(3,2,4);
+  //  tab = tab.Add(&a);
 
-        }
-            catch (std::bad_alloc &ba) {
-                std::cout << "Error in allocating memory: " << ba.what() << std::endl;
-            }
-            catch (std::exception &ex) {
-                std::cout << "Exception detected: " << ex.what() << std::endl;
-            }
-            catch (...) {
-                std::cout << "Unknown error occured!" << std::endl;
-            }
+    tab.Display();
 
-    return 0;
 }

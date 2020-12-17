@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.17)
-project(oop3lena)
+project(oop4_lena)
 
 set(CMAKE_CXX_STANDARD 14)
-
-add_executable(oop3lena main.cpp alphabet.cpp alphabet.h dialog.h dialog.cpp getnum.h helper.cpp helper.h)
+add_library(Lux Lux.cpp Lux.h)
+link_libraries(Lux)
+add_library(Multiseat Multiseat.cpp Multiseat.h)
+link_libraries(Multiseat)
+add_library(Standart Standart.h Standart.cpp)
+link_libraries(Standart)
+add_library(Table Table.cpp Table.h)
+link_libraries(Table)
+add_library(Room Room.cpp Room.h)
+link_libraries(Room)
+add_executable(oop4_lena main.cpp)
